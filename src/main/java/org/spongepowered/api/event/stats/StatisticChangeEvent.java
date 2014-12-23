@@ -22,16 +22,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.api.event.entity.player;
 
-import org.spongepowered.api.block.BlockLoc;
-import org.spongepowered.api.entity.player.Player;
-import org.spongepowered.api.event.entity.living.human.HumanPlaceBlockEvent;
-import org.spongepowered.api.event.stats.StatisticChangeEvent;
+package org.spongepowered.api.event.stats;
+
+import org.spongepowered.api.stats.Statistic;
+import org.spongepowered.api.util.event.Event;
+
+import java.util.Collection;
 
 /**
- * Called when a {@link Player} places a {@link BlockLoc}.
+ * Represents an event that is triggered if one or more {@link Statistic}s are
+ * about to change their values.
  */
-public interface PlayerPlaceBlockEvent extends PlayerChangeBlockEvent, HumanPlaceBlockEvent, StatisticChangeEvent {
+public interface StatisticChangeEvent extends Event {
+
+    /**
+     * Gets a {@link Collection} containing all {@link StatisticChange}s.
+     *
+     * @return A collection containing all changes to statistics
+     */
+    Collection<StatisticChange> getStatisticChanges();
 
 }

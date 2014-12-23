@@ -22,16 +22,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.api.event.entity.player;
 
-import org.spongepowered.api.block.BlockLoc;
-import org.spongepowered.api.entity.player.Player;
-import org.spongepowered.api.event.entity.living.human.HumanPlaceBlockEvent;
-import org.spongepowered.api.event.stats.StatisticChangeEvent;
+package org.spongepowered.api.stats;
 
 /**
- * Called when a {@link Player} places a {@link BlockLoc}.
+ * Represents a grouped {@link Statistic} with a {@link StatisticType} that
+ * defines the grouping criteria.
  */
-public interface PlayerPlaceBlockEvent extends PlayerChangeBlockEvent, HumanPlaceBlockEvent, StatisticChangeEvent {
+public interface GroupedStatistic extends Statistic {
+
+    /**
+     * Gets the {@link StatisticType} this {@link Statistic} belongs to.
+     *
+     * @return The statistic type this statistic belongs to
+     */
+    StatisticType getType();
 
 }

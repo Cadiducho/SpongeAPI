@@ -22,16 +22,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.api.event.entity.player;
 
-import org.spongepowered.api.block.BlockLoc;
-import org.spongepowered.api.entity.player.Player;
-import org.spongepowered.api.event.entity.living.human.HumanPlaceBlockEvent;
-import org.spongepowered.api.event.stats.StatisticChangeEvent;
+package org.spongepowered.api.stats;
 
 /**
- * Called when a {@link Player} places a {@link BlockLoc}.
+ * A utility class for getting all available {@link StatisticUnit}s.
  */
-public interface PlayerPlaceBlockEvent extends PlayerChangeBlockEvent, HumanPlaceBlockEvent, StatisticChangeEvent {
+public final class StatisticUnits {
+
+    /**
+     * A statistic without unit.
+     */
+    public static StatisticUnit COUNT = null;
+    /**
+     * A statistic measured in centimeters.
+     */
+    public static StatisticUnit DISTANCE_CM = null;
+    /**
+     * A statistic measured in 0.1 steps.
+     */
+    public static StatisticUnit FRACTIONAL1 = null;
+    /**
+     * A statistic measured in minutes.
+     */
+    public static StatisticUnit TIME_MINUTES = null;
+
+    private StatisticUnits() {
+    }
 
 }

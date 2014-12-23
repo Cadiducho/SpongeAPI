@@ -22,16 +22,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.api.event.entity.player;
 
-import org.spongepowered.api.block.BlockLoc;
-import org.spongepowered.api.entity.player.Player;
-import org.spongepowered.api.event.entity.living.human.HumanPlaceBlockEvent;
-import org.spongepowered.api.event.stats.StatisticChangeEvent;
+package org.spongepowered.api.stats;
+
+import org.spongepowered.api.text.format.TextColor;
 
 /**
- * Called when a {@link Player} places a {@link BlockLoc}.
+ * Represents a {@link Statistic} with a {@link TeamStatisticType} for a team's
+ * {@link TextColor}.
  */
-public interface PlayerPlaceBlockEvent extends PlayerChangeBlockEvent, HumanPlaceBlockEvent, StatisticChangeEvent {
+public interface TeamStatistic extends GroupedStatistic {
+
+    /**
+     * Gets the {@link TeamStatisticType} this {@link Statistic} belongs to.
+     *
+     * @return The team statistic type this statistic belongs to
+     */
+    @Override
+    TeamStatisticType getType();
+
+    /**
+     * Gets the team's {@link TextColor} this {@link Statistic} measures.
+     *
+     * @return The team's text color this statistic measures
+     */
+    TextColor getTeamColor();
 
 }

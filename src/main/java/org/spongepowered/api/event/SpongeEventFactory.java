@@ -113,6 +113,9 @@ import org.spongepowered.api.event.entity.player.fishing.PlayerRetractFishingLin
 import org.spongepowered.api.event.message.CommandEvent;
 import org.spongepowered.api.event.message.MessageEvent;
 import org.spongepowered.api.event.server.StatusPingEvent;
+import org.spongepowered.api.event.stats.AchievementEvent;
+import org.spongepowered.api.event.stats.StatisticChange;
+import org.spongepowered.api.event.stats.StatisticChangeEvent;
 import org.spongepowered.api.event.weather.LightningStrikeEvent;
 import org.spongepowered.api.event.weather.WeatherChangeEvent;
 import org.spongepowered.api.event.world.ChunkForcedEvent;
@@ -130,6 +133,7 @@ import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.item.inventory.types.TileInventory;
 import org.spongepowered.api.status.StatusClient;
 import org.spongepowered.api.text.Text;
+import org.spongepowered.api.stats.achievement.Achievement;
 import org.spongepowered.api.util.Direction;
 import org.spongepowered.api.util.command.CommandSource;
 import org.spongepowered.api.util.event.factory.ClassGeneratorProvider;
@@ -917,8 +921,7 @@ public final class SpongeEventFactory {
      * @param exp The experience to give, or take for negative values
      * @return A new instance of the event
      */
-    public static PlayerBreakBlockEvent createPlayerBreakBlock(Game game, Cause cause, Player player, Direction direction, BlockLoc block,
-            BlockSnapshot replacementBlock, int exp) {
+    public static PlayerBreakBlockEvent createPlayerBreakBlock(Game game, Cause cause, Player player, Direction direction, BlockLoc block, BlockSnapshot replacementBlock, int exp, Collection<StatisticChange> statisticChanges) {
         Map<String, Object> values = Maps.newHashMap();
         values.put("game", game);
         values.put("cause", Optional.fromNullable(cause));
@@ -930,6 +933,7 @@ public final class SpongeEventFactory {
         values.put("living", player);
         values.put("blockFaceDirection", direction);
         values.put("exp", exp);
+        values.put("statisticChanges", statisticChanges);
         return createEvent(PlayerBreakBlockEvent.class, values);
     }
 
@@ -1105,7 +1109,7 @@ public final class SpongeEventFactory {
      * @return A new instance of the event
      */
     public static PlayerDeathEvent createPlayerDeath(Game game, Cause cause, Player player, Location location, Text deathMessage,
-            Collection<Item> droppedItems, int exp, int newExperience, int newLevel, boolean keepsLevel, boolean keepsInventory) {
+            Collection<Item> droppedItems, int exp, int newExperience, int newLevel, boolean keepsLevel, boolean keepsInventory, Collection<StatisticChange> statisticChanges) {
         Map<String, Object> values = Maps.newHashMap();
         values.put("game", game);
         values.put("cause", Optional.fromNullable(cause));
@@ -1121,6 +1125,7 @@ public final class SpongeEventFactory {
         values.put("newLevel", newLevel);
         values.put("keepsLevel", keepsLevel);
         values.put("keepsInventory", keepsInventory);
+        values.put("statisticChanges", statisticChanges);
         return createEvent(PlayerDeathEvent.class, values);
     }
 
@@ -1274,7 +1279,7 @@ public final class SpongeEventFactory {
      * @return A new instance of the event
      */
     public static PlayerMoveEvent createPlayerMove(Game game, Player player,
-            Location oldLocation, Location newLocation, Vector3d rotation) {
+            Location oldLocation, Location newLocation, Vector3d rotation, Collection<StatisticChange> statisticChanges) {
         Map<String, Object> values = Maps.newHashMap();
         values.put("game", game);
         values.put("entity", player);
@@ -1284,6 +1289,7 @@ public final class SpongeEventFactory {
         values.put("human", player);
         values.put("living", player);
         values.put("rotation", rotation);
+        values.put("statisticChanges", statisticChanges);
         return createEvent(PlayerMoveEvent.class, values);
     }
 
@@ -1318,7 +1324,7 @@ public final class SpongeEventFactory {
      * @return A new instance of the event
      */
     public static PlayerPlaceBlockEvent createPlayerPlaceBlock(Game game, Cause cause, Player player, BlockLoc block,
-            BlockSnapshot replacementBlock, Direction direction) {
+            BlockSnapshot replacementBlock, Direction direction, Collection<StatisticChange> statisticChanges) {
         Map<String, Object> values = Maps.newHashMap();
         values.put("game", game);
         values.put("cause", Optional.fromNullable(cause));
@@ -1329,6 +1335,7 @@ public final class SpongeEventFactory {
         values.put("human", player);
         values.put("living", player);
         values.put("blockFaceDirection", direction);
+        values.put("statisticChanges", statisticChanges);
         return createEvent(PlayerPlaceBlockEvent.class, values);
     }
 
@@ -1387,6 +1394,23 @@ public final class SpongeEventFactory {
         values.put("struckEntities", struckEntities);
         values.put("struckBlocks", struckBlocks);
         return createEvent(LightningStrikeEvent.class, values);
+    }
+
+    public static AchievementEvent createAchievementEvent(Game game, Player player, Achievement achievement) {
+        Map<String, Object> values = Maps.newHashMap();
+        values.put("game", game);
+        values.put("entity", player);
+        values.put("living", player);
+        values.put("human", player);
+        values.put("player", player);
+        values.put("achievement", achievement);
+        return createEvent(AchievementEvent.class, values);
+    }
+
+    public static StatisticChangeEvent createStatisticChangeEvent(Collection<StatisticChange> statisticChanges) {
+        Map<String, Object> values = Maps.newHashMap();
+        values.put("statisticChanges", statisticChanges);
+        return createEvent(StatisticChangeEvent.class, values);
     }
 
     /**
