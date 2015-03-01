@@ -22,34 +22,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+package org.spongepowered.api.event.block.tile;
 
-package org.spongepowered.api.world.extent;
+import org.spongepowered.api.block.tile.lockable.Furnace;
+import org.spongepowered.api.event.inventory.BlockInventoryEvent;
 
-import com.flowpowered.math.vector.Vector3i;
-import org.spongepowered.api.block.BlockLoc;
-import org.spongepowered.api.world.weather.WeatherUniverse;
+public interface FurnaceEvent extends TileEntityEvent, BlockInventoryEvent {
 
-/**
- * Contains blocks, tile entities, entities, and possibly other game objects.
- */
-public interface Extent extends EntityUniverse, TileEntityVolume, WeatherUniverse, BiomeArea {
-
-    /**
-     * Get a representation of the block at the given position.
-     *
-     * @param position The position
-     * @return The block
-     */
-    BlockLoc getFullBlock(Vector3i position);
-
-    /**
-     * Get a representation of the block at the given position.
-     *
-     * @param x The X position
-     * @param y The Y position
-     * @param z The Z position
-     * @return The block
-     */
-    BlockLoc getFullBlock(int x, int y, int z);
-
+    @Override
+    Furnace getTile();
 }
