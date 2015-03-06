@@ -25,9 +25,12 @@
 
 package org.spongepowered.api.block.meta;
 
+import org.spongepowered.api.util.annotation.CatalogedBy;
+
 /**
  * Represents a type of skull.
  */
+@CatalogedBy(SkullTypes.class)
 public interface SkullType {
 
     /**

@@ -26,10 +26,12 @@
 package org.spongepowered.api.block.meta;
 
 import org.spongepowered.api.block.data.Note;
+import org.spongepowered.api.util.annotation.CatalogedBy;
 
 /**
  * Represents a NotePitch which may be played by a {@link Note} block.
  */
+@CatalogedBy(NotePitches.class)
 public interface NotePitch {
 
     /**

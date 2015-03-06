@@ -25,7 +25,9 @@
 package org.spongepowered.api.entity.living.animal;
 
 import org.spongepowered.api.service.persistence.DataSerializable;
+import org.spongepowered.api.util.annotation.CatalogedBy;
 
+@CatalogedBy(RabbitTypes.class)
 public interface RabbitType extends DataSerializable {
 
     /**

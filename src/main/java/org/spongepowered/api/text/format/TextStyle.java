@@ -27,6 +27,7 @@ package org.spongepowered.api.text.format;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import org.spongepowered.api.text.message.Message;
+import org.spongepowered.api.util.annotation.CatalogedBy;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -67,6 +68,7 @@ import java.util.Map;
  *
  * @see TextStyles
  */
+@CatalogedBy(TextStyles.class)
 public class TextStyle {
 
     /**

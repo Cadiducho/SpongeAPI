@@ -25,9 +25,12 @@
 
 package org.spongepowered.api.potion;
 
+import org.spongepowered.api.util.annotation.CatalogedBy;
+
 /**
  * Represents a possible type of {@link PotionEffect}.
  */
+@CatalogedBy(PotionEffectTypes.class)
 public interface PotionEffectType {
 
     /**

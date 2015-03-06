@@ -25,6 +25,7 @@
 package org.spongepowered.api.text.translation;
 
 import org.spongepowered.api.text.translation.locale.Locales;
+import org.spongepowered.api.util.annotation.CatalogedBy;
 
 /**
  * Represents an identifier for text that can be translated into multiple
@@ -39,6 +40,7 @@ import org.spongepowered.api.text.translation.locale.Locales;
  * only {@link Locales#ENGLISH}.
  * </p>
  */
+@CatalogedBy(Translations.class)
 public interface Translation {
 
     /**

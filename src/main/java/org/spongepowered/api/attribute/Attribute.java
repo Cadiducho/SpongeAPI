@@ -27,11 +27,13 @@ package org.spongepowered.api.attribute;
 
 import com.google.common.base.Predicate;
 import org.spongepowered.api.text.message.Message;
+import org.spongepowered.api.util.annotation.CatalogedBy;
 
 /**
  * Represents an type of attribute that can be applied to a
  * {@link AttributeHolder}.
  */
+@CatalogedBy(Attributes.class)
 public interface Attribute {
 
     /**
