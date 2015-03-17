@@ -23,28 +23,21 @@
  * THE SOFTWARE.
  */
 
-package org.spongepowered.api.world.gen;
-
-import org.spongepowered.api.util.gen.MutableBiomeArea;
-import org.spongepowered.api.world.World;
+package org.spongepowered.api.world;
 
 /**
- * Manages the biome generation for an extent.
+ * An enumeration of default {@link GeneratorType}s.
  */
-public interface BiomeGenerator {
+public final class GeneratorTypes {
 
-    /**
-     * Generates the biomes for the given area using only biomes from the given
-     * array of available biomes. The resultant biomes are placed into the
-     * given buffer.
-     *
-     * @param world The world these biomes are being generated for
-     * @param buffer The buffer to generate the biomes into
-     * @param x The X position of the lowest point
-     * @param z The Z position of the lowest point
-     * @param width The width of the area (X-axis size)
-     * @param length The length of the area (Z-axis size)
-     */
-    void generateBiomes(World world, MutableBiomeArea buffer, int x, int z, int width, int length);
+    public static final GeneratorType DEFAULT = null;
+    public static final GeneratorType FLAT = null;
+    public static final GeneratorType LARGE_BIOMES = null;
+    public static final GeneratorType AMPLIFIED = null;
+    public static final GeneratorType SUPER_FLAT = null;
+    public static final GeneratorType DEBUG = null;
+
+    private GeneratorTypes() {
+    }
 
 }

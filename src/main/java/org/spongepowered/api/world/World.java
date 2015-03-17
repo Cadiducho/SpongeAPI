@@ -33,7 +33,8 @@ import org.spongepowered.api.service.permission.context.Contextual;
 import org.spongepowered.api.util.Identifiable;
 import org.spongepowered.api.world.difficulty.Difficulty;
 import org.spongepowered.api.world.extent.Extent;
-import org.spongepowered.api.world.gen.WorldGenerator;
+import org.spongepowered.api.world.gen.ChunkGenerator;
+import org.spongepowered.api.world.storage.WorldProperties;
 import org.spongepowered.api.world.storage.WorldStorage;
 
 import java.util.Map;
@@ -52,22 +53,22 @@ public interface World extends Extent, Viewer, Contextual, Identifiable {
     Difficulty getDifficulty();
 
     /**
-     * Sets the {@link Difficulty} setting for this world.
-     *
-     * @param difficulty Difficulty of the world
-     */
-    void setDifficulty(Difficulty difficulty);
-
-    /**
      * Gets the name of the world.
      *
-     * <p>The world name may randomly generated or user-defined. It may or
-     * may not be safe to be used in a filename.</p>
+     * <p>The world name may randomly generated or user-defined. It may or may
+     * not be safe to be used in a filename.</p>
      *
      * @return The world name
      * @see #getUniqueId() A method to get a unique identifier
      */
     String getName();
+
+    /**
+     * Returns whether this world is loaded.
+     *
+     * @return True if this world is loaded
+     */
+    boolean isLoaded();
 
     /**
      * Get the loaded chunk at the given position.
@@ -88,8 +89,8 @@ public interface World extends Extent, Viewer, Contextual, Identifiable {
     Optional<Chunk> loadChunk(Vector3i position, boolean shouldGenerate);
 
     /**
-     * Unloads the given chunk from the world. Returns a {@code boolean}
-     * flag for whether the operation was successful.
+     * Unloads the given chunk from the world. Returns a {@code boolean} flag
+     * for whether the operation was successful.
      *
      * @param chunk The chunk to unload
      * @return Whether the operation was successful
@@ -134,18 +135,9 @@ public interface World extends Extent, Viewer, Contextual, Identifiable {
     Optional<String> getGameRule(String gameRule);
 
     /**
-     * Sets the specified GameRule value. If one with this name
-     * does not exist, it will be created.
-     *
-     * @param gameRule The name of the GameRule.
-     * @param value The value to set the GameRule to.
-     */
-    void setGameRule(String gameRule, String value);
-
-    /**
-     * Gets a {@link Map} of all GameRules with values in this world.
-     **
-     * @return A collection of GameRules.
+     * Gets a map of the currently set game rules and their values.
+     * 
+     * @return An immutable map of the game rules
      */
     Map<String, String> getGameRules();
 
@@ -164,42 +156,37 @@ public interface World extends Extent, Viewer, Contextual, Identifiable {
     long getWorldSeed();
 
     /**
-     * Sets the random seed for this world.
+     * Gets the {@link ChunkGenerator} for this world.
      *
-     * @param seed The seed
+     * @return The chunk generator
      */
-    void setSeed(long seed);
+    ChunkGenerator getChunkGenerator();
 
     /**
-     * Gets the {@link WorldGenerator} for this world.
-     *
-     * @return The world generator
-     */
-    WorldGenerator getWorldGenerator();
-
-    /**
-     * Sets the {@link WorldGenerator} for this world to use to create new
+     * Sets the {@link ChunkGenerator} for this world to use to create new
      * chunks.
      *
      * @param generator The new generator
      */
-    void setWorldGenerator(WorldGenerator generator);
+    void setChunkGenerator(ChunkGenerator generator);
 
     /**
-     * Returns whether this {@link World}'s spawn chunks remain loaded when no players are present.
-     * Note: This method will default to this {@link World}'s {@link DimensionType}'s
-     * keepLoaded value unless a plugin overrides it.
+     * Returns whether this {@link World}'s spawn chunks remain loaded when no
+     * players are present. Note: This method will default to this {@link World}
+     * 's {@link DimensionType}'s keepLoaded value unless a plugin overrides it.
      *
-     * @return True if {@link World} remains loaded without players, false if not
+     * @return True if {@link World} remains loaded without players, false if
+     *         not
      */
     boolean doesKeepSpawnLoaded();
 
     /**
-     * Sets whether this {@link World}'s spawn chunks remain loaded when no players are present.
-     * Note: This method will override the default {@link DimensionType}'s keepLoaded
-     * value.
+     * Sets whether this {@link World}'s spawn chunks remain loaded when no
+     * players are present. Note: This method will override the default
+     * {@link DimensionType}'s keepLoaded value.
      *
-     * @param keepLoaded Whether this {@link World}'s spawn chunks remain loaded without players
+     * @param keepLoaded Whether this {@link World}'s spawn chunks remain loaded
+     *            without players
      */
     void setKeepSpawnLoaded(boolean keepLoaded);
 
@@ -209,5 +196,20 @@ public interface World extends Extent, Viewer, Contextual, Identifiable {
      * @return The associated world storage
      */
     WorldStorage getWorldStorage();
+
+    /**
+     * Gets the {@link WorldCreationSettings} which were used to create this
+     * world.
+     * 
+     * @return The settings
+     */
+    WorldCreationSettings getCreationSettings();
+
+    /**
+     * Gets the properties for this world.
+     * 
+     * @return The properties
+     */
+    WorldProperties getProperties();
 
 }

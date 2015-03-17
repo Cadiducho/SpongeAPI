@@ -25,6 +25,8 @@
 
 package org.spongepowered.api;
 
+import org.spongepowered.api.service.persistence.data.DataContainer;
+import org.spongepowered.api.world.gen.ChunkGenerator;
 import com.google.common.base.Optional;
 import org.spongepowered.api.attribute.Attribute;
 import org.spongepowered.api.attribute.AttributeBuilder;
@@ -72,8 +74,13 @@ import org.spongepowered.api.text.selector.SelectorType;
 import org.spongepowered.api.text.translation.Translation;
 import org.spongepowered.api.util.rotation.Rotation;
 import org.spongepowered.api.world.DimensionType;
+import org.spongepowered.api.world.World;
+import org.spongepowered.api.world.WorldBuilder;
+import org.spongepowered.api.world.WorldCreationSettings;
+import org.spongepowered.api.world.GeneratorType;
 import org.spongepowered.api.world.biome.BiomeType;
 import org.spongepowered.api.world.difficulty.Difficulty;
+import org.spongepowered.api.world.storage.WorldProperties;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -84,6 +91,9 @@ import java.net.URL;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.UUID;
+import java.util.concurrent.Callable;
+
+import javax.annotation.Nullable;
 
 /**
  * Provides an easy way to retrieve types from a {@link Game}.
@@ -824,5 +834,75 @@ public interface GameRegistry {
      * @return The {@link Translation} with the given ID or Optional.absent() if not found
      */
     Optional<Translation> getTranslationById(String id);
+
+    /**
+     * Gets a new {@link WorldBuilder} for creating {@link World}s or
+     * {@link WorldCreationSettings}s.
+     * 
+     * @return A new builder
+     */
+    WorldBuilder getWorldBuilder();
+
+    /**
+     * Gets a new {@link WorldBuilder} for creating {@link World}s or
+     * {@link WorldCreationSettings}s, the builder is then seeded with the
+     * values from the given WorldCreationSettings object.
+     * 
+     * @param settings The seed settings
+     * @return A new seeded builder
+     */
+    WorldBuilder getWorldBuilder(WorldCreationSettings settings);
+
+    /**
+     * Gets a new {@link WorldBuilder} for creating {@link World}s or
+     * {@link WorldCreationSettings}s, the builder is then seeded with the
+     * values from the given WorldProperties object.
+     * 
+     * @param properties The seed properties
+     * @return A new seeded builder
+     */
+    WorldBuilder getWorldBuilder(WorldProperties properties);
+
+    /**
+     * Gets a {@link GeneratorType} by name.
+     * 
+     * @param name The requested name
+     * @return The generator type, if available
+     */
+    Optional<GeneratorType> getGeneratorType(String name);
+
+    /**
+     * Gets a collection of all available {@link GeneratorType}s.
+     * 
+     * @return All available world types
+     */
+    Collection<GeneratorType> getGeneratorTypes();
+
+    /**
+     * Creates and registers a new {@link GeneratorType} with the given name and
+     * {@link ChunkGenerator}. An empty {@link DataContainer} will be created
+     * for the settings within {@link GeneratorType#getGeneratorSettings()}.
+     * 
+     * @param name The name of the generator type
+     * @param generator A callable which returns a new chunk generator
+     * @return The new GeneratorType
+     */
+    GeneratorType registerGeneratorType(String name, Callable<ChunkGenerator> generator);
+    
+    /**
+     * Creates and registers a new {@link GeneratorType} with the given name and
+     * {@link ChunkGenerator}.
+     * 
+     * <p>The {@link DataContainer} with settings for the world generator is
+     * optional and an empty DataContainer will be created if it is not
+     * provided.</p>
+     * 
+     * @param name The name of the generator type
+     * @param generator A callable which returns a new chunk generator
+     * @param settings Any settings that the generator uses, or null if no
+     *            settings are used
+     * @return The new GeneratorType
+     */
+    GeneratorType registerGeneratorType(String name, Callable<ChunkGenerator> generator, DataContainer settings);
 
 }

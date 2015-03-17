@@ -23,28 +23,36 @@
  * THE SOFTWARE.
  */
 
-package org.spongepowered.api.world.gen;
+package org.spongepowered.api.world;
 
-import org.spongepowered.api.util.gen.MutableBiomeArea;
-import org.spongepowered.api.world.World;
+import org.spongepowered.api.service.persistence.data.DataContainer;
+import org.spongepowered.api.world.gen.ChunkGenerator;
 
 /**
- * Manages the biome generation for an extent.
+ * Represents a world type. This is in general a {@link ChunkGenerator} and the
+ * settings for the generator.
  */
-public interface BiomeGenerator {
+public interface GeneratorType {
 
     /**
-     * Generates the biomes for the given area using only biomes from the given
-     * array of available biomes. The resultant biomes are placed into the
-     * given buffer.
-     *
-     * @param world The world these biomes are being generated for
-     * @param buffer The buffer to generate the biomes into
-     * @param x The X position of the lowest point
-     * @param z The Z position of the lowest point
-     * @param width The width of the area (X-axis size)
-     * @param length The length of the area (Z-axis size)
+     * Gets the name of this world type.
+     * 
+     * @return The name
      */
-    void generateBiomes(World world, MutableBiomeArea buffer, int x, int z, int width, int length);
+    String getName();
+
+    /**
+     * Creates a new {@link ChunkGenerator} for this world type.
+     * 
+     * @return The new generator
+     */
+    ChunkGenerator createGenerator();
+
+    /**
+     * Gets a copy of the settings for the world generator.
+     * 
+     * @return The settings
+     */
+    DataContainer getGeneratorSettings();
 
 }

@@ -23,28 +23,31 @@
  * THE SOFTWARE.
  */
 
-package org.spongepowered.api.world.gen;
+package org.spongepowered.api.event.world;
 
-import org.spongepowered.api.util.gen.MutableBiomeArea;
-import org.spongepowered.api.world.World;
+import org.spongepowered.api.event.GameEvent;
+import org.spongepowered.api.world.WorldCreationSettings;
+import org.spongepowered.api.world.storage.WorldProperties;
+
 
 /**
- * Manages the biome generation for an extent.
+ * An event for when a world has been created. Often paired with a
+ * {@link WorldLoadEvent}, but that is not guaranteed.
  */
-public interface BiomeGenerator {
+public interface WorldCreateEvent extends GameEvent {
 
     /**
-     * Generates the biomes for the given area using only biomes from the given
-     * array of available biomes. The resultant biomes are placed into the
-     * given buffer.
-     *
-     * @param world The world these biomes are being generated for
-     * @param buffer The buffer to generate the biomes into
-     * @param x The X position of the lowest point
-     * @param z The Z position of the lowest point
-     * @param width The width of the area (X-axis size)
-     * @param length The length of the area (Z-axis size)
+     * Gets the properties of the newly created world.
+     * 
+     * @return The properties
      */
-    void generateBiomes(World world, MutableBiomeArea buffer, int x, int z, int width, int length);
-
+    WorldProperties getWorldProperties();
+    
+    /**
+     * Gets the {@link WorldCreationSettings} used to create the world.
+     * 
+     * @return The creation settings
+     */
+    WorldCreationSettings getWorldCreationSettings();
+    
 }
