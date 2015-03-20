@@ -23,24 +23,45 @@
  * THE SOFTWARE.
  */
 
-package org.spongepowered.api.block.tile.lockable;
+package org.spongepowered.api.block.tile.carrier;
+
+import org.spongepowered.api.block.tile.TileDataTransactionResult;
+import org.spongepowered.api.block.tile.data.HopperData;
 
 /**
  * Represents a Hopper.
  */
-public interface Hopper extends Lockable {
+public interface Hopper extends TileEntityCarrier {
 
     /**
-     * Gets the remaining time before the next item will be transfered.
+     * Requests this {@link Hopper} to transfer an item to the next carrier.
      *
-     * @return The remaining time, in ticks
+     * <p>Since {@link Hopper}s normally send items to other {@link
+     * TileEntityCarrier}s adjacent to themselves, if there is no available
+     * carrier to send an item to, this will perform nothing.</p>
      */
-    int getTransferCooldown();
+    void transferItem();
 
     /**
-     * Sets the cooldown before the next item will be transfered.
+     * Gets the current {@link HopperData} of this hopper.
      *
-     * @param time The new time, in ticks
+     * <p>Note that as time goes on, the {@link HopperData} may not remain in
+     * sync with the {@link Hopper} tile entity. It is advisable that a
+     * {@link HopperData} is manipulated in the same tick that it is
+     * retrieved.</p>
+     *
+     * @return The currently associated {@link HopperData}
      */
-    void setTransferCooldown(int time);
+    HopperData getHopperData();
+
+    /**
+     * Sets the given {@link HopperData} onto this {@link Hopper}.
+
+     * <p>Validation is performed on the {@link HopperData} to ensure the
+     * desired data is properly set.</p>
+
+     * @param data The hopper data to set
+     * @return The transaction result
+     */
+    TileDataTransactionResult setHopperData(HopperData data);
 }

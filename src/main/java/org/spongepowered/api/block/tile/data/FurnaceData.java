@@ -23,30 +23,42 @@
  * THE SOFTWARE.
  */
 
-package org.spongepowered.api.block.tile;
+package org.spongepowered.api.block.tile.data;
 
-import org.spongepowered.api.block.tile.data.SignData;
+import org.spongepowered.api.block.tile.carrier.Furnace;
 
 /**
- * Represents a sign.
+ * Represents the usable data of a {@link Furnace}.
  */
-public interface Sign extends TileEntity {
+public interface FurnaceData extends TileEntityData<Furnace, FurnaceData> {
 
     /**
-     * Gets the data that this {@link Sign} is currently using.
+     * Gets the remaining time until another piece of fuel will be consumed.
+     * Will be zero if the furnace is not currently lit.
      *
-     * @return The current sign data
+     * @return The remaining time, in ticks
      */
-    SignData getSignData();
+    int getRemainingBurnTime();
 
     /**
-     * Sets the requested {@link SignData} onto this {@link Sign}.
+     * Sets the remaining time until a new piece of fuel will be consumed.
      *
-     * <p>Validation is performed on the {@link SignData} to ensure the
-     * desired data is properly set.</p>
-     *
-     * @param data The sign data to set
-     * @return The transaction result
+     * @param time The new time, in ticks
      */
-    TileDataTransactionResult setSignData(SignData data);
+    void setRemainingBurnTime(int time);
+
+    /**
+     * Gets the remaining time until the next item is cooked.
+     *
+     * @return The remaining time, in ticks
+     */
+    int getRemainingCookTime();
+
+    /**
+     * Sets the remaining time until a new item is cooked.
+     *
+     * @param time The new time, in ticks
+     */
+    void setRemainingCookTime(int time);
+
 }

@@ -23,30 +23,27 @@
  * THE SOFTWARE.
  */
 
-package org.spongepowered.api.block.tile;
+package org.spongepowered.api.block.tile.data;
 
-import org.spongepowered.api.block.tile.data.SignData;
+import org.spongepowered.api.block.tile.Note;
 
 /**
- * Represents a sign.
+ * Represents a NotePitch which may be played by a {@link Note} block.
  */
-public interface Sign extends TileEntity {
+public interface NotePitch {
 
     /**
-     * Gets the data that this {@link Sign} is currently using.
+     * Gets the id of this {@link NotePitch}.
      *
-     * @return The current sign data
+     * @return The id
      */
-    SignData getSignData();
+    byte getId();
 
     /**
-     * Sets the requested {@link SignData} onto this {@link Sign}.
+     * Gets the name of this pitch.
      *
-     * <p>Validation is performed on the {@link SignData} to ensure the
-     * desired data is properly set.</p>
-     *
-     * @param data The sign data to set
-     * @return The transaction result
+     * @return The name
      */
-    TileDataTransactionResult setSignData(SignData data);
+    String getName();
+
 }

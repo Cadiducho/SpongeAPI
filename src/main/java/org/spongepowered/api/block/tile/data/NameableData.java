@@ -23,30 +23,28 @@
  * THE SOFTWARE.
  */
 
-package org.spongepowered.api.block.tile;
+package org.spongepowered.api.block.tile.data;
 
-import org.spongepowered.api.block.tile.data.SignData;
+import org.spongepowered.api.block.tile.TileEntity;
 
 /**
- * Represents a sign.
+ * Represents a display nameable data for a {@link TileEntity} that may display
+ * in chat, above the entity, or in a gui window.
  */
-public interface Sign extends TileEntity {
+public interface NameableData extends TileEntityData<TileEntity, NameableData> {
 
     /**
-     * Gets the data that this {@link Sign} is currently using.
+     * Gets the current custom name for the {@link TileEntity}.
      *
-     * @return The current sign data
+     * @return The current custom name
      */
-    SignData getSignData();
+    String getCustomName();
 
     /**
-     * Sets the requested {@link SignData} onto this {@link Sign}.
+     * Sets the custom name for the {@link TileEntity}.
      *
-     * <p>Validation is performed on the {@link SignData} to ensure the
-     * desired data is properly set.</p>
-     *
-     * @param data The sign data to set
-     * @return The transaction result
+     * @param name The name of the tile entity
      */
-    TileDataTransactionResult setSignData(SignData data);
+    void setCustomName(String name);
+
 }

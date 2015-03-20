@@ -22,31 +22,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+package org.spongepowered.api.block.tile.carrier;
 
-package org.spongepowered.api.block.tile;
-
-import org.spongepowered.api.block.tile.data.SignData;
+import org.spongepowered.api.block.tile.TileDataTransactionResult;
+import org.spongepowered.api.block.tile.data.FurnaceData;
 
 /**
- * Represents a sign.
+ * Represents a Furnace.
  */
-public interface Sign extends TileEntity {
+public interface Furnace extends TileEntityCarrier {
 
     /**
-     * Gets the data that this {@link Sign} is currently using.
+     * Gets the current {@link FurnaceData} of this furnace.
      *
-     * @return The current sign data
+     * <p>Note that as time goes on, the {@link FurnaceData} may not remain in
+     * sync with the {@link Furnace} tile entity. It is advisable that a
+     * {@link FurnaceData} is manipulated in the same tick that it is
+     * retrieved.</p>
+     *
+     * @return The currently associated {@link FurnaceData}
      */
-    SignData getSignData();
+    FurnaceData getFurnaceData();
 
     /**
-     * Sets the requested {@link SignData} onto this {@link Sign}.
-     *
-     * <p>Validation is performed on the {@link SignData} to ensure the
+     * Sets the given {@link FurnaceData} onto this {@link Furnace}.
+
+     * <p>Validation is performed on the {@link FurnaceData} to ensure the
      * desired data is properly set.</p>
-     *
-     * @param data The sign data to set
+
+     * @param data The furnace data to set
      * @return The transaction result
      */
-    TileDataTransactionResult setSignData(SignData data);
+    TileDataTransactionResult setFurnaceData(FurnaceData data);
+
 }

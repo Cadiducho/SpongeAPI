@@ -23,25 +23,29 @@
  * THE SOFTWARE.
  */
 
-package org.spongepowered.api.block.tile;
+package org.spongepowered.api.block.tile.data;
+
+import org.spongepowered.api.block.tile.carrier.BrewingStand;
 
 /**
- * Represents a NotePitch which may be played by a {@link Note} block.
+ * Represents data associated with a {@link BrewingStand}.
  */
-public interface NotePitch {
+public interface BrewingData extends TileEntityData<BrewingStand, BrewingData> {
 
     /**
-     * Gets the id of this {@link NotePitch}.
+     * Gets the remaining time until the brewing is complete. Will be zero if
+     * the brewing stand is not currently brewing anything.
      *
-     * @return The id
+     * @return The remaining time, in ticks
      */
-    byte getId();
+    int getRemainingBrewTime();
 
     /**
-     * Gets the name of this pitch.
+     * Sets the remaining time until the brewing is complete. This will only
+     * have effect if the current items within the brewing stand are valid.
      *
-     * @return The name
+     * @param time The new remaining time, in ticks
      */
-    String getName();
+    void setRemainingBrewTime(int time);
 
 }

@@ -22,31 +22,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+package org.spongepowered.api.block.tile.carrier;
 
-package org.spongepowered.api.block.tile;
-
-import org.spongepowered.api.block.tile.data.SignData;
+import org.spongepowered.api.block.tile.TileDataTransactionResult;
+import org.spongepowered.api.block.tile.data.BrewingData;
 
 /**
- * Represents a sign.
+ * Represents a Brewing Stand.
  */
-public interface Sign extends TileEntity {
+public interface BrewingStand extends TileEntityCarrier {
 
     /**
-     * Gets the data that this {@link Sign} is currently using.
+     /**
+     * Gets the current {@link BrewingData} of this {@link BrewingStand}.
      *
-     * @return The current sign data
+     * <p>Note that as time goes on, the {@link BrewingData} may not remain in
+     * sync with the {@link BrewingStand} tile entity. It is advisable that a
+     * {@link BrewingData} is manipulated in the same tick that it is
+     * retrieved.</p>
+     *
+     * @return The currently associated {@link BrewingData}
      */
-    SignData getSignData();
+    BrewingData getBrewingData();
 
     /**
-     * Sets the requested {@link SignData} onto this {@link Sign}.
-     *
-     * <p>Validation is performed on the {@link SignData} to ensure the
+     * Sets the given {@link BrewingData} onto this {@link BrewingStand}.
+
+     * <p>Validation is performed on the {@link BrewingData} to ensure the
      * desired data is properly set.</p>
-     *
-     * @param data The sign data to set
+
+     * @param data The brewing data to set
      * @return The transaction result
      */
-    TileDataTransactionResult setSignData(SignData data);
+    TileDataTransactionResult setBrewingData(BrewingData data);
 }

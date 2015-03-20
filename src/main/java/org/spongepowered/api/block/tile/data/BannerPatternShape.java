@@ -22,31 +22,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
-package org.spongepowered.api.block.tile;
-
-import org.spongepowered.api.block.tile.data.SignData;
+package org.spongepowered.api.block.tile.data;
 
 /**
- * Represents a sign.
+ * A pattern shape which may be applied to a banner.
  */
-public interface Sign extends TileEntity {
+public interface BannerPatternShape {
 
     /**
-     * Gets the data that this {@link Sign} is currently using.
+     * Gets the name of this pattern shape.
      *
-     * @return The current sign data
+     * @return The name
      */
-    SignData getSignData();
+    String getName();
 
     /**
-     * Sets the requested {@link SignData} onto this {@link Sign}.
+     * Gets the id for this pattern shape.
      *
-     * <p>Validation is performed on the {@link SignData} to ensure the
-     * desired data is properly set.</p>
-     *
-     * @param data The sign data to set
-     * @return The transaction result
+     * @return The id
      */
-    TileDataTransactionResult setSignData(SignData data);
+    String getId();
+
 }

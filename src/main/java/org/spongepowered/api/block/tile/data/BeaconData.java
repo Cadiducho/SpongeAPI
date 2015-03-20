@@ -22,27 +22,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.api.block.tile.lockable;
+
+package org.spongepowered.api.block.tile.data;
+
+import com.google.common.base.Optional;
+import org.spongepowered.api.block.tile.carrier.Beacon;
+import org.spongepowered.api.potion.PotionEffectType;
 
 /**
- * Represents a Brewing Stand.
+ * Represents data used by {@link Beacon}s.
  */
-public interface BrewingStand extends Lockable {
+public interface BeaconData extends TileEntityData<Beacon, BeaconData> {
 
     /**
-     * Gets the remaining time until the brewing is complete. Will be zero if
-     * the brewing stand is not currently brewing anything.
+     * Gets the primary effect provided by this beacon.
      *
-     * @return The remaining time, in ticks
+     * @return The primary effect
      */
-    int getRemainingBrewTime();
+    Optional<PotionEffectType> getPrimaryEffect();
 
     /**
-     * Sets the remaining time until the brewing is complete. This will only
-     * have effect if the current items within the brewing stand are valid.
+     * Sets the primary effect for this beacon.
      *
-     * @param time The new remaining time, in ticks
+     * @param effect The new primary effect
      */
-    void setRemainingBrewTime(int time);
+    void setPrimaryEffect(PotionEffectType effect);
+
+    /**
+     * Gets the secondary effect provided by this beacon.
+     *
+     * @return The secondary effect
+     */
+    Optional<PotionEffectType> getSecondaryEffect();
+
+    /**
+     * Sets the secondary effect for this beacon.
+     *
+     * @param effect The new secondary effect
+     */
+    void setSecondaryEffect(PotionEffectType effect);
+
+    /**
+     * Clears all selected potion effects for this beacon.
+     */
+    void clearEffects();
 
 }

@@ -23,30 +23,13 @@
  * THE SOFTWARE.
  */
 
-package org.spongepowered.api.block.tile;
+package org.spongepowered.api.block.tile.carrier;
 
-import org.spongepowered.api.block.tile.data.SignData;
+import org.spongepowered.api.entity.projectile.source.BlockProjectileSource;
 
 /**
- * Represents a sign.
+ * Represents a Dispenser.
  */
-public interface Sign extends TileEntity {
+public interface Dispenser extends TileEntityCarrier, BlockProjectileSource {
 
-    /**
-     * Gets the data that this {@link Sign} is currently using.
-     *
-     * @return The current sign data
-     */
-    SignData getSignData();
-
-    /**
-     * Sets the requested {@link SignData} onto this {@link Sign}.
-     *
-     * <p>Validation is performed on the {@link SignData} to ensure the
-     * desired data is properly set.</p>
-     *
-     * @param data The sign data to set
-     * @return The transaction result
-     */
-    TileDataTransactionResult setSignData(SignData data);
 }

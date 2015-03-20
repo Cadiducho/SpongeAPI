@@ -23,30 +23,34 @@
  * THE SOFTWARE.
  */
 
-package org.spongepowered.api.block.tile;
+package org.spongepowered.api.block.tile.data;
 
-import org.spongepowered.api.block.tile.data.SignData;
+import com.google.common.base.Optional;
+import org.spongepowered.api.block.tile.FlowerPot;
+import org.spongepowered.api.item.inventory.ItemStack;
+
+import javax.annotation.Nullable;
 
 /**
- * Represents a sign.
+ * Represents data that a {@link FlowerPot} would use to display an item.
  */
-public interface Sign extends TileEntity {
+public interface FlowerPotData extends TileEntityData<FlowerPot, FlowerPotData> {
 
     /**
-     * Gets the data that this {@link Sign} is currently using.
+     * Retrieves the contents of this flower pot, if available.
      *
-     * @return The current sign data
+     * @return The contents of this flower pot, or {@link Optional#absent()}
      */
-    SignData getSignData();
+    Optional<ItemStack> getContents();
 
     /**
-     * Sets the requested {@link SignData} onto this {@link Sign}.
+     * Sets or removes the contents of this flower pot.
      *
-     * <p>Validation is performed on the {@link SignData} to ensure the
-     * desired data is properly set.</p>
+     * <p>Only the item type and data of the item stack are used, other values
+     * like stack size are ignored.</p>
      *
-     * @param data The sign data to set
-     * @return The transaction result
+     * @param contents The contents to place, or {@code null} to remove contents
      */
-    TileDataTransactionResult setSignData(SignData data);
+    void setContents(@Nullable ItemStack contents);
+
 }

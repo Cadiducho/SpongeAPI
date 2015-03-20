@@ -22,31 +22,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+package org.spongepowered.api.block.tile.data;
 
-package org.spongepowered.api.block.tile;
-
-import org.spongepowered.api.block.tile.data.SignData;
+import com.google.common.base.Optional;
+import org.spongepowered.api.block.tile.TileEntity;
+import org.spongepowered.api.service.persistence.DataSerializable;
 
 /**
- * Represents a sign.
+ * Represents data held by a {@link TileEntity}.
+ *
+ * <p>Traditionally, a {@link TileEntity} will perform various actions based on
+ * it's data represented by {@link TileEntityData}. Required data for a {@link
+ * TileEntity} will always exist, but </p>
  */
-public interface Sign extends TileEntity {
+public interface TileEntityData<E extends TileEntity, T extends TileEntityData<E, T>> extends Comparable<T>, DataSerializable {
 
     /**
-     * Gets the data that this {@link Sign} is currently using.
+     * Retrieves the tile entity that is backing this tile entity data, if a
+     * tile entity is backing this data.
      *
-     * @return The current sign data
+     * @return The backing tile entity, or {@link Optional#absent()}
      */
-    SignData getSignData();
+    Optional<E> getTileEntity();
 
-    /**
-     * Sets the requested {@link SignData} onto this {@link Sign}.
-     *
-     * <p>Validation is performed on the {@link SignData} to ensure the
-     * desired data is properly set.</p>
-     *
-     * @param data The sign data to set
-     * @return The transaction result
-     */
-    TileDataTransactionResult setSignData(SignData data);
 }

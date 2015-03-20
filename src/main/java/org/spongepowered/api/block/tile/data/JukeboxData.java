@@ -23,21 +23,33 @@
  * THE SOFTWARE.
  */
 
-package org.spongepowered.api.block.tile;
+package org.spongepowered.api.block.tile.data;
+
+import com.google.common.base.Optional;
+import org.spongepowered.api.block.tile.Jukebox;
+import org.spongepowered.api.item.inventory.ItemStack;
+
+import javax.annotation.Nullable;
 
 /**
- * An enumeration of all possible {@link SkullType}s in vanilla minecraft.
+ * Represents the data of a {@link Jukebox}.
  */
-public final class SkullTypes {
+public interface JukeboxData extends TileEntityData<Jukebox, JukeboxData> {
 
-    // These values will not be null at runtime
+    /**
+     * Retrieves the record contained in this Jukebox, if there is one.
+     *
+     * @return The record in this Jukebox or {@link Optional#absent()}
+     */
+    Optional<ItemStack> getRecord();
 
-    public static SkullType SKELETON = null;
-    public static SkullType WITHER_SKELETON = null;
-    public static SkullType ZOMBIE = null;
-    public static SkullType PLAYER = null;
-    public static SkullType CREEPER = null;
+    /**
+     * Sets the record contained within this Jukebox to the given one.
+     * If the given one is null, the record within this Jukebox is removed and the item
+     * destroyed.
+     *
+     * @param record The record to set, or null to destroy the record
+     */
+    void setRecord(@Nullable ItemStack record);
 
-    private SkullTypes() {
-    }
 }

@@ -23,11 +23,27 @@
  * THE SOFTWARE.
  */
 
-package org.spongepowered.api.block.tile.lockable;
+package org.spongepowered.api.block.tile.data;
+
+import org.spongepowered.api.block.tile.Note;
 
 /**
- * Represents a Chest.
+ * Represents data for a {@link Note} that defines what music can be played.
  */
-public interface Chest extends Lockable {
+public interface NoteData extends TileEntityData<Note, NoteData> {
+
+    /**
+     * Gets the note played by this note block.
+     *
+     * @return The note
+     */
+    NotePitch getNote();
+
+    /**
+     * Sets the note to be played by this note block.
+     *
+     * @param note The new note
+     */
+    void setNote(NotePitch note);
 
 }

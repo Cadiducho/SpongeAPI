@@ -23,30 +23,27 @@
  * THE SOFTWARE.
  */
 
-package org.spongepowered.api.block.tile;
+package org.spongepowered.api.block.tile.data;
 
-import org.spongepowered.api.block.tile.data.SignData;
+import org.spongepowered.api.block.tile.Comparator;
 
 /**
- * Represents a sign.
+ * Represents the output signal for a {@link Comparator}.
  */
-public interface Sign extends TileEntity {
+public interface ComparatorData extends TileEntityData<Comparator, ComparatorData> {
 
     /**
-     * Gets the data that this {@link Sign} is currently using.
+     * Gets the output signal strength.
      *
-     * @return The current sign data
+     * @return The signal strength
      */
-    SignData getSignData();
+    int getOutputSignal();
 
     /**
-     * Sets the requested {@link SignData} onto this {@link Sign}.
+     * Sets the output signal strength.
      *
-     * <p>Validation is performed on the {@link SignData} to ensure the
-     * desired data is properly set.</p>
-     *
-     * @param data The sign data to set
-     * @return The transaction result
+     * @param signal The new signal strength
      */
-    TileDataTransactionResult setSignData(SignData data);
+    void setOutputSignal(int signal);
+
 }

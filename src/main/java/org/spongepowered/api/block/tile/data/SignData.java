@@ -23,30 +23,49 @@
  * THE SOFTWARE.
  */
 
-package org.spongepowered.api.block.tile;
+package org.spongepowered.api.block.tile.data;
 
-import org.spongepowered.api.block.tile.data.SignData;
+import org.spongepowered.api.block.tile.Sign;
+import org.spongepowered.api.text.message.Message;
 
 /**
- * Represents a sign.
+ * Represents the data for a {@link Sign}.
  */
-public interface Sign extends TileEntity {
+public interface SignData extends TileEntityData<Sign, SignData> {
 
     /**
-     * Gets the data that this {@link Sign} is currently using.
+     * Gets all lines of text on the sign.
      *
-     * @return The current sign data
+     * @return The lines of text
      */
-    SignData getSignData();
+    Message[] getLines();
 
     /**
-     * Sets the requested {@link SignData} onto this {@link Sign}.
+     * Sets the lines of text on the sign. Any lines past the maximum number of
+     * lines displayable on the sign will be ignored.
      *
-     * <p>Validation is performed on the {@link SignData} to ensure the
-     * desired data is properly set.</p>
-     *
-     * @param data The sign data to set
-     * @return The transaction result
+     * @param lines The new lines
      */
-    TileDataTransactionResult setSignData(SignData data);
+    void setLines(Message... lines);
+
+    /**
+     * Gets the line at the given index.
+     *
+     * @param index The index
+     * @return The line of text
+     * @throws IndexOutOfBoundsException If the index is outside of the allowed
+     *             indices
+     */
+    Message getLine(int index) throws IndexOutOfBoundsException;
+
+    /**
+     * Sets the line at the given index.
+     *
+     * @param index The index to set the line at
+     * @param text The new text
+     * @throws IndexOutOfBoundsException If the index is outside
+     *            of the allowed indices
+     */
+    void setLine(int index, Message text) throws IndexOutOfBoundsException;
+
 }

@@ -22,55 +22,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.spongepowered.api.block.tile.lockable;
 
-import com.google.common.base.Optional;
-import org.spongepowered.api.potion.PotionEffectType;
+package org.spongepowered.api.block.tile.carrier;
 
 /**
- * Represents a Beacon.
+ * Represents a Dropper.
  */
-public interface Beacon extends Lockable {
-
-    /**
-     * Gets the primary effect provided by this beacon.
-     *
-     * @return The primary effect
-     */
-    Optional<PotionEffectType> getPrimaryEffect();
-
-    /**
-     * Sets the primary effect for this beacon.
-     *
-     * @param effect The new primary effect
-     */
-    void setPrimaryEffect(PotionEffectType effect);
-
-    /**
-     * Gets the secondary effect provided by this beacon.
-     *
-     * @return The secondary effect
-     */
-    Optional<PotionEffectType> getSecondaryEffect();
-
-    /**
-     * Sets the secondary effect for this beacon.
-     *
-     * @param effect The new secondary effect
-     */
-    void setSecondaryEffect(PotionEffectType effect);
-
-    /**
-     * Clears all selected potion effects for this beacon.
-     */
-    void clearEffects();
-
-    /**
-     * Gets the number of completed levels of valid beacon structure blocks
-     * beneath this beacon.
-     *
-     * @return The number of levels
-     */
-    int getCompletedLevels();
+public interface Dropper extends TileEntityCarrier {
 
 }
