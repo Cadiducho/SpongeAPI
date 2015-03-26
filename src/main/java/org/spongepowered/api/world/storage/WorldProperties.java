@@ -39,6 +39,7 @@ import org.spongepowered.api.world.WorldBorder;
 import org.spongepowered.api.world.difficulty.Difficulty;
 
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Represents the WorldProperties which are persisted across runtime instances.
@@ -58,6 +59,43 @@ public interface WorldProperties extends DataSerializable {
      * @return Is enabled
      */
     boolean isEnabled();
+
+    /**
+     * Gets whether this world has been initialized.
+     * 
+     * @return Is initialized
+     */
+    boolean isInitialized();
+
+    /**
+     * Persists these properties to disk if this world is currently unloaded.
+     * 
+     * <p>If the world is loaded then this has no effect.</p>
+     * 
+     * @return True if the save was successful
+     */
+    boolean save();
+
+    /**
+     * Gets the name of this world.
+     * 
+     * @return The name
+     */
+    String getWorldName();
+
+    /**
+     * Sets the name of this world.
+     * 
+     * @param name The name
+     */
+    void setWorldName(String name);
+    
+    /**
+     * Gets the UUID of the world.
+     * 
+     * @return The UUID
+     */
+    UUID getUUID();
 
     /**
      * Sets this world as enabled. If a world is enabled then it will be loaded
@@ -140,40 +178,34 @@ public interface WorldProperties extends DataSerializable {
      */
     void setWorldTime(long time);
 
-    /**
-     * Gets the Unix time stamp of when this world was last loaded.
+    /*
+     * TODO this method is commented out pending proper handling for client only
+     * API
      * 
-     * @return The time this world was last loaded
+     * Gets the Unix time stamp of when this world was last played on in a
+     * single player client.
+     * 
+     * <p>This value is only used for single-player worlds and cannot be called
+     * from a server plugin.</p>
+     * 
+     * @return The time this world was last played on
      */
-    long getLastTimePlayed();
+    //long getLastTimePlayed();
+     
 
     /**
      * Gets the {@link DimensionType} of this world.
      * 
      * @return The dimension type
      */
-    DimensionType getDimension();
+    DimensionType getDimensionType();
 
     /**
      * Sets the {@link DimensionType} of this world.
      * 
      * @param type The dimension type
      */
-    void setDimension(DimensionType type);
-
-    /**
-     * Gets the name of this world.
-     * 
-     * @return The name
-     */
-    String getWorldName();
-
-    /**
-     * Sets the name of this world.
-     * 
-     * @param name The name
-     */
-    void setWorldName(String name);
+    void setDimensionType(DimensionType type);
 
     /**
      * Gets whether this world is currently experiencing rain/snow/cloud-cover
@@ -189,7 +221,7 @@ public interface WorldProperties extends DataSerializable {
      * 
      * @param state Is raining
      */
-    void isRaining(boolean state);
+    void setRaining(boolean state);
 
     /**
      * Gets the number of ticks until the weather is next toggled to a new
@@ -205,7 +237,7 @@ public interface WorldProperties extends DataSerializable {
      * 
      * @param time The time until the weather changes
      */
-    void getRainTime(int time);
+    void setRainTime(int time);
 
     /**
      * Gets whether this world is currently experiencing a lightning storm.
@@ -298,13 +330,6 @@ public interface WorldProperties extends DataSerializable {
     void areCommandsAllowed(boolean state);
 
     /**
-     * Gets whether this world has been initialized.
-     * 
-     * @return Is initialized
-     */
-    boolean isInitialized();
-
-    /**
      * Gets the difficulty of this world.
      * 
      * @return The difficulty
@@ -376,14 +401,5 @@ public interface WorldProperties extends DataSerializable {
      * @param data The new data
      */
     void setPropertySection(DataQuery path, DataView data);
-
-    /**
-     * Persists these properties to disk if this world is currently unloaded.
-     * 
-     * <p>If the world is loaded then this has no effect.</p>
-     * 
-     * @return True if the save was successful
-     */
-    boolean save();
 
 }
