@@ -28,6 +28,8 @@ package org.spongepowered.api.util.command;
 import org.spongepowered.api.service.permission.Subject;
 import org.spongepowered.api.text.Text;
 
+import java.util.Locale;
+
 /**
  * Something that can execute commands.
  *
@@ -42,6 +44,13 @@ public interface CommandSource extends Subject {
      * @return The name of this command source
      */
     String getName();
+
+    /**
+     * Gets the preferred locale of this command source.
+     *
+     * @return This command source's locale
+     */
+    Locale getLocale();
 
     /**
      * Sends the formatted text message(s) to source when possible. If text formatting
